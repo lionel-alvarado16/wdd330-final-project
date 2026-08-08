@@ -3,6 +3,12 @@ export function qs(selector, parent = document) {
     return parent.querySelector(selector);
 }
 
+export function renderWithTemplate(template, parentElement, data, callback) {
+    parentElement.innerHTML = template;
+    if (callback) {
+        callback(data);
+    }
+}
 // Fetch and return template HTML as text
 export async function loadTemplate(path) {
     const response = await fetch(path);
@@ -20,12 +26,8 @@ export async function loadHeaderFooter() {
     const headerElement = qs('#main-header');
     const footerElement = qs('#main-footer');
 
-    if (headerElement) {
-        headerElement.innerHTML = headerTemplate;
-    }
-    if (footerElement) {
-        footerElement.innerHTML = footerTemplate;
-    }
+    renderWithTemplate(headerTemplate, headerElement);
+    renderWithTemplate(footerTemplate, footerElement);
 
     initHeaderMenu();
     initFooterData();
