@@ -1,4 +1,3 @@
-/* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
 
 :root {
@@ -40,7 +39,6 @@ header {
   color: var(--accent-color);
 }
 
-/* Hamburger Menu (De tu proyecto Cosmic Insights) */
 #menu-button {
   background: none;
   border: none;
@@ -92,12 +90,42 @@ main {
   padding: 1.5rem;
 }
 
-/* Utility Class (De tu proyecto Sleep Outside) */
+/* Form Search Styles */
+.search-section {
+  margin-bottom: 2rem;
+}
+
+#search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+#search-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Utility Class */
 .hide {
   display: none !important;
 }
 
-/* Footer (De tu proyecto Cosmic Insights) */
+/* Footer */
 footer {
   background-color: var(--card-bg);
   text-align: center;

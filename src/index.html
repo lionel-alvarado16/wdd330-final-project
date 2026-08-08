@@ -9,20 +9,11 @@
       content="Search for music artists, explore top tracks, listen to audio previews, and save your favorite songs."
     />
     <meta name="author" content="Lionel Alvarado" />
-    <link rel="stylesheet" href="css/style.css" />
-    <script type="module" src="js/main.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/main.js"></script>
   </head>
   <body>
-    <header>
-      <div class="logo-container">
-        <h1>Music Explorer</h1>
-      </div>
-      <button id="menu-button" aria-label="Toggle Navigation">&#9776;</button>
-      <nav id="primary-nav">
-        <a href="#search">Search</a>
-        <a href="#favorites">Favorites</a>
-      </nav>
-    </header>
+    <header id="main-header"></header>
 
     <main>
       <!-- Search Section -->
@@ -33,7 +24,6 @@
             id="search-input"
             placeholder="Search artist or song..."
             required
-            aria-label="Search artist or song"
           />
           <button type="submit">Search</button>
         </form>
@@ -47,10 +37,10 @@
         </div>
       </section>
 
-      <!-- Modal Dialog (De tu proyecto Cosmic Insights) -->
+      <!-- Modal Dialog-->
       <dialog id="details-modal">
         <div class="modal-content">
-          <button id="close-modal" aria-label="Close details">&times;</button>
+          <button id="close-modal">&times;</button>
           <div id="modal-details-body">
             <!-- Dynamic Details Rendered Here -->
           </div>
@@ -58,11 +48,6 @@
       </dialog>
     </main>
 
-    <footer>
-      <p>
-        &copy; <span id="currentYear"></span> Music Explorer | Lionel Alvarado
-      </p>
-      <p>Last Modified: <span id="lastModified"></span></p>
-    </footer>
+    <footer id="main-footer"></footer>
   </body>
 </html>

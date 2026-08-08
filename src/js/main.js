@@ -1,5 +1,5 @@
-import { initHeaderAndFooter } from "./modules/utils.mjs";
+import { loadHeaderFooter } from "./modules/utils.mjs";
 
-document.addEventListener("DOMContentLoaded", () => {
-  initHeaderAndFooter();
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadHeaderFooter();
 });

@@ -1,10 +1,37 @@
-// Utilidad Selector DOM (De tu proyecto Sleep Outside)
+// DOM Selector Utility Helper
 export function qs(selector, parent = document) {
     return parent.querySelector(selector);
 }
 
-// Menú Hamburguesa & Footer (De tu proyecto Cosmic Insights)
-export function initHeaderAndFooter() {
+// Fetch and return template HTML as text
+export async function loadTemplate(path) {
+    const response = await fetch(path);
+    if (response.ok) {
+        return await response.text();
+    }
+    throw new Error(`Failed to load template at: ${path}`);
+}
+
+// Load Header and Footer Partials dynamically
+export async function loadHeaderFooter() {
+    const headerTemplate = await loadTemplate('../partials/header.html');
+    const footerTemplate = await loadTemplate('../partials/footer.html');
+
+    const headerElement = qs('#main-header');
+    const footerElement = qs('#main-footer');
+
+    if (headerElement) {
+        headerElement.innerHTML = headerTemplate;
+    }
+    if (footerElement) {
+        footerElement.innerHTML = footerTemplate;
+    }
+
+    initHeaderMenu();
+    initFooterData();
+}
+
+function initHeaderMenu() {
     const menuButton = qs('#menu-button');
     const nav = qs('#primary-nav');
 
@@ -15,11 +42,16 @@ export function initHeaderAndFooter() {
             menuButton.innerHTML = menuButton.classList.contains('open') ? '&times;' : '&#9776;';
         });
     }
+}
 
-    // Set Current Year and Last Modified
+function initFooterData() {
     const yearSpan = qs('#currentYear');
     const lastModSpan = qs('#lastModified');
 
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-    if (lastModSpan) lastModSpan.textContent = document.lastModified;
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+    if (lastModSpan) {
+        lastModSpan.textContent = document.lastModified;
+    }
 }
