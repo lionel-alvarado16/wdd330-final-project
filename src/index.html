@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Music Explorer | Find Your Favorite Tracks</title>
+    <meta
+      name="description"
+      content="Search for music artists, explore top tracks, listen to audio previews, and save your favorite songs."
+    />
+    <meta name="author" content="Lionel Alvarado" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <h1>Music Explorer</h1>
+      </div>
+      <button id="menu-button" aria-label="Toggle Navigation">&#9776;</button>
+      <nav id="primary-nav">
+        <a href="#search">Search</a>
+        <a href="#favorites">Favorites</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Search Section -->
+      <section class="search-section">
+        <form id="search-form">
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search artist or song..."
+            required
+            aria-label="Search artist or song"
+          />
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <!-- Results Grid Container -->
+      <section class="results-section">
+        <h2>Results</h2>
+        <div id="music-grid" class="music-grid">
+          <!-- Dynamic Content Rendered Here -->
+        </div>
+      </section>
+
+      <!-- Modal Dialog (De tu proyecto Cosmic Insights) -->
+      <dialog id="details-modal">
+        <div class="modal-content">
+          <button id="close-modal" aria-label="Close details">&times;</button>
+          <div id="modal-details-body">
+            <!-- Dynamic Details Rendered Here -->
+          </div>
+        </div>
+      </dialog>
+    </main>
+
+    <footer>
+      <p>
+        &copy; <span id="currentYear"></span> Music Explorer | Lionel Alvarado
+      </p>
+      <p>Last Modified: <span id="lastModified"></span></p>
+    </footer>
+  </body>
+</html>
