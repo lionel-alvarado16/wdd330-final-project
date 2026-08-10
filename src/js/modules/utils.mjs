@@ -20,8 +20,8 @@ export async function loadTemplate(path) {
 
 // Load Header and Footer Partials dynamically
 export async function loadHeaderFooter() {
-    const headerTemplate = await loadTemplate("partials/header.html");
-    const footerTemplate = await loadTemplate("partials/footer.html");
+    const headerTemplate = await loadTemplate("./partials/header.html");
+    const footerTemplate = await loadTemplate("./partials/footer.html");
 
     const headerElement = qs('#main-header');
     const footerElement = qs('#main-footer');
