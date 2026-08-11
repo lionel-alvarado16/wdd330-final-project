@@ -2,14 +2,26 @@ import { initHeaderAndFooter, qs } from "./modules/utils.mjs";
 import { searchTracks } from "./modules/api.mjs";
 import { displayTracks } from "./modules/ui.mjs";
 
-document.addEventListener("DOMContentLoaded", () => {
-  initHeaderAndFooter();
-});
-
-// Select required DOM elements
+// Select required form and display elements
 const searchForm = qs("#search-form");
 const searchInput = qs("#search-input");
 const musicGrid = qs("#music-grid");
+
+document.addEventListener("DOMContentLoaded", async () => {
+  initHeaderAndFooter();
+
+  // Load popular tracks by default on page load
+  if (musicGrid) {
+    musicGrid.innerHTML = `<p class="loading">Loading popular tracks...</p>`;
+    try {
+      // Default query to populate results initially
+      const defaultTracks = await searchTracks("top hits");
+      displayTracks(defaultTracks, musicGrid);
+    } catch {
+      musicGrid.innerHTML = `<p class="error">Failed to load popular tracks. Please try again later.</p>`;
+    }
+  }
+});
 
 // Event listener for search form submission
 searchForm.addEventListener("submit", async (event) => {
@@ -25,12 +37,12 @@ searchForm.addEventListener("submit", async (event) => {
   musicGrid.innerHTML = `<p class="loading">Searching tracks for "${query}"...</p>`;
 
   try {
+    // Fetch track data from API module
     const tracks = await searchTracks(query);
 
-    // Display the results inside the grid container
+    // Render results grid with modal listeners attached
     displayTracks(tracks, musicGrid);
-  } catch (error) {
-    console.error("Error fetching tracks:", error);
+  } catch {
     musicGrid.innerHTML = `<p class="error">Something went wrong while fetching the songs. Please try again.</p>`;
   }
 });
