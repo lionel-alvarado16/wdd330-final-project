@@ -437,6 +437,10 @@ footer#main-footer {
   display: none !important;
 }
 
+h1 {
+  text-align: center;
+}
+
 /* Responsive Media Queries */
 @media (min-width: 768px) {
   #menu-button {
