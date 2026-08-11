@@ -14,7 +14,7 @@ export async function searchTracks(searchTerm) {
         return data.results;
     } catch (error) {
         console.error("Error fetching data from iTunes:", error);
-        return [];
+        throw error;
     }
 }
 
@@ -31,6 +31,6 @@ export async function getTrackById(trackId) {
         return data.results[0];
     } catch (error) {
         console.error("Error fetching track details from iTunes:", error);
-        return null;
+        throw error;
     }
 }

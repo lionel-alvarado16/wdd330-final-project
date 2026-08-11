@@ -103,3 +103,13 @@ export function displayTracks(tracks, container) {
         };
     }
 }
+
+// Render loading spinner
+export function showLoading(container) {
+    container.innerHTML = '<div class="spinner" role="status"></div>';
+}
+
+// Render error message
+export function showError(message, container) {
+    container.innerHTML = `<p class="error-message">⚠️ ${message}</p>`;
+}
