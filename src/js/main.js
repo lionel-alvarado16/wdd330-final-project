@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     musicGrid.innerHTML = `<p class="loading">Loading popular tracks...</p>`;
     try {
       // Default query to populate results initially
-      const defaultTracks = await searchTracks("top hits");
+      const defaultTracks = await searchTracks("pop");
       displayTracks(defaultTracks, musicGrid);
     } catch {
       musicGrid.innerHTML = `<p class="error">Failed to load popular tracks. Please try again later.</p>`;
