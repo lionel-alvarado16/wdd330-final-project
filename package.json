@@ -1,7 +1,7 @@
 {
   "name": "music-explorer",
   "version": "1.0.0",
-  "description": "Music search application using Itunes and TheAudioDB APIs",
+  "description": "Music search application using Itunes and Wikipedia API APIs",
   "main": "main.js",
   "scripts": {
     "start": "vite",
