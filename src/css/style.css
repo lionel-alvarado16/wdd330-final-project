@@ -155,7 +155,7 @@ main {
 /* Music Grid and Track Cards */
 .music-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   margin-top: 1.5rem;
   width: 100%;
@@ -177,6 +177,8 @@ main {
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -186,7 +188,7 @@ main {
 }
 
 .card-image-container,
-.track-card > img {
+.track-card>img {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -198,7 +200,7 @@ main {
 }
 
 .card-image-container img,
-.track-card > img {
+.track-card>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -214,6 +216,7 @@ main {
   justify-content: center;
   flex-grow: 1;
   margin-bottom: 0.5rem;
+  overflow: hidden;
 }
 
 .track-card h3 {
@@ -438,6 +441,12 @@ footer#main-footer {
 }
 
 /* Responsive Media Queries */
+@media (min-width: 600px) {
+  .music-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 768px) {
   #menu-button {
     display: none;
@@ -455,9 +464,9 @@ footer#main-footer {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .music-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.25rem;
   }
 }
