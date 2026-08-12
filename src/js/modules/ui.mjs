@@ -1,5 +1,6 @@
 import { qs } from "./utils.mjs";
 import { addFavorite, removeFavorite, isFavorite } from "./storage.mjs";
+import { getArtistBio } from "./api.mjs";
 
 // Function to render the list of tracks on the screen
 export function displayTracks(tracks, container) {
@@ -51,12 +52,12 @@ export function displayTracks(tracks, container) {
         // Event listener for Favorite button click
         const favBtn = trackCard.querySelector(".fav-btn");
         favBtn.addEventListener("click", () => {
-            if (isFavorite(track.trackId)) { 
+            if (isFavorite(track.trackId)) {
                 removeFavorite(track.trackId);
 
                 // If we are currently on the favorites page (#favorites-grid), remove the card directly from screen
                 if (container.id === "favorites-grid") {
-                    trackCard.remove()
+                    trackCard.remove();
                     // Show empty state message if no cards remain
                     if (container.children.length === 0) {
                         container.innerHTML = '<p class="no-results">You have no saved favorite tracks yet!</p>';
@@ -66,7 +67,14 @@ export function displayTracks(tracks, container) {
                     favBtn.setAttribute("title", "Add to Favorites");
                 }
             } else {
-                addFavorite(track);
+                const trackToSave = {
+                    trackId: track.trackId,
+                    trackName: track.trackName,
+                    artistName: track.artistName,
+                    artworkUrl100: track.artworkUrl100,
+                    previewUrl: track.previewUrl
+                };
+                addFavorite(trackToSave);
                 favBtn.textContent = "❤️";
                 favBtn.setAttribute("title", "Remove from Favorites");
             }
@@ -74,7 +82,8 @@ export function displayTracks(tracks, container) {
 
         // Attach click event to "View Details" button for this specific track
         const detailsBtn = trackCard.querySelector(".details-btn");
-        detailsBtn.addEventListener("click", () => {
+        detailsBtn.addEventListener("click", async () => {
+            // Render basic modal structure with a placeholder for artist bio
             modalBody.innerHTML = `
                 <h2>${track.trackName}</h2>
                 <p><strong>Artist:</strong> ${track.artistName}</p>
@@ -82,11 +91,23 @@ export function displayTracks(tracks, container) {
                 <p><strong>Genre:</strong> ${track.primaryGenreName || "N/A"}</p>
                 <p><strong>Price:</strong> $${track.trackPrice || "N/A"}</p>
                 <p><strong>Release Date:</strong> ${track.releaseDate ? new Date(track.releaseDate).toLocaleDateString() : "N/A"}</p>
-                ${track.trackViewUrl || track.collectionViewUrl ? `<a href="${track.trackViewUrl || track.collecionViewUrl}" target="_blank" rel="noopener noreferrer"">View on Apple Music</a>` : ""}
+                ${track.trackViewUrl || track.collectionViewUrl ? `<a href="${track.trackViewUrl || track.collectionViewUrl}" target="_blank" rel="noopener noreferrer">View on Apple Music</a>` : ""}
+                
+                <div class="artist-bio-container">
+                    <h3>About the Artist</h3>
+                    <p id="bio-text">Loading artist info...</p>
+                </div>
             `;
 
-            // Open native HTML modal dialog
+            // Open native HTML modal dialog immediately
             modal.showModal();
+
+            // Fetch artist biography asynchronously from 2nd API (Wikipedia)
+            const bio = await getArtistBio(track.artistName);
+            const bioText = modalBody.querySelector("#bio-text");
+            if (bioText) {
+                bioText.textContent = bio;
+            }
         });
 
         // Append the completed track card to the grid container

@@ -13,7 +13,6 @@ export async function searchTracks(searchTerm) {
         const data = await response.json();
         return data.results;
     } catch (error) {
-        console.error("Error fetching data from iTunes:", error);
         throw error;
     }
 }
@@ -30,7 +29,32 @@ export async function getTrackById(trackId) {
         const data = await response.json();
         return data.results[0];
     } catch (error) {
-        console.error("Error fetching track details from iTunes:", error);
         throw error;
+    }
+}
+
+export async function getArtistBio(artistName) {
+    try {
+        const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&titles=${artistName}&format=json&origin=*`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch artist biography");
+        }
+
+        const data = await response.json();
+        const pages = data.query.pages;
+
+        // Iterate through pages object using for...in to get the dynamically generated page ID
+        for (const pageId in pages) {
+            if (pageId === "-1" || !pages[pageId].extract) {
+                return "No biography available for this artist.";
+            }
+            return pages[pageId].extract;
+        }
+
+        return "No biography available for this artist.";
+    } catch (error) {
+        return "Could not load artist biography at this time.";
     }
 }
