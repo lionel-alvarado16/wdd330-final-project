@@ -37,13 +37,15 @@ export function displayTracks(tracks, container) {
                 <img src="${artworkUrl}" alt="${track.trackName} cover" class="track-image"/>
                 <button class="fav-btn" title="${favLabel}">${favIcon}</button>
             </div>
+    
             <div class="track-info">
                 <h3 class="track-title">${track.trackName}</h3>
                 <p class="track-artist">${track.artistName}</p>
                 <p class="track-album">${track.collectionName || "Single"}</p>
-                <audio controls src="${track.previewUrl}"></audio>
-                <button class="details-btn">View Details</button>
             </div>
+
+            <audio controls src="${track.previewUrl}"></audio>
+            <button class="details-btn">View Details</button>
         `;
 
         // Event listener for Favorite button click

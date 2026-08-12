@@ -180,6 +180,7 @@ main {
   max-width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  min-width: 0;
 }
 
 .track-card:hover {
@@ -188,7 +189,7 @@ main {
 }
 
 .card-image-container,
-.track-card>img {
+.track-card > img {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -200,11 +201,22 @@ main {
 }
 
 .card-image-container img,
-.track-card>img {
+.track-card > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.track-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  min-width: 0;
 }
 
 .track-info-container,
@@ -219,32 +231,34 @@ main {
   overflow: hidden;
 }
 
+.track-card h3,
+.track-card p {
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .track-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 0.35rem;
   color: var(--text-color);
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .track-card p {
   font-size: 0.85rem;
   color: var(--text-muted);
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   line-height: 1.4;
 }
 
 .track-card audio {
   width: 100%;
-  min-width: 250px;
+  max-width: 100%;
+  min-width: 0 !important;
   height: 40px;
-  margin-top: 0.85rem;
+  margin-top: auto;
   margin-bottom: 1rem;
   display: block;
   flex-shrink: 0;
