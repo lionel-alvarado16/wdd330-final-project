@@ -4,7 +4,7 @@ const ITUNES_BASE_URL = "https://itunes.apple.com";
 // Endpoint 1: General song search
 export async function searchTracks(searchTerm) {
     try {
-        const response = await fetch(`${ITUNES_BASE_URL}/search?entity=song&limit=12&term=${searchTerm}`);
+        const response = await fetch(`${ITUNES_BASE_URL}/search?entity=song&limit=52&term=${searchTerm}`);
         
         if (!response.ok) {
             throw new Error(`HTTPS Error: ${response.status}`);
